@@ -3,7 +3,7 @@ name: Run C Program on macOS
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch: # 수동으로도 실행할 수 있도록 설정
+  workflow_dispatch: # 수동 실행 버튼 활성화
 
 jobs:
   build-and-run:
@@ -11,14 +11,14 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    # 1. 저장소의 소스 코드를 VM으로 가져옴
+    # 1. 저장소의 소스 코드를 VM으로 체크아웃
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # 2. Clang 컴파일러를 사용해 hello.c 빌드
+    # 2. main.c 파일을 빌드하여 main이라는 실행 파일 생성
     - name: Compile C program
-      run: gcc hello.c -o hello
+      run: gcc main.c -o main
 
-    # 3. 컴파일된 바이너리 실행
+    # 3. 컴파일된 main 바이너리 실행
     - name: Execute program
-      run: ./hello
+      run: ./main
